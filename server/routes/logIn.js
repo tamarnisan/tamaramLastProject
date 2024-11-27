@@ -5,10 +5,10 @@ router.post("/", (req, res) => {
     const sql = `SELECT * FROM password WHERE username='${req.body.username}' AND password='${req.body.password}'`;
     console.log("sql: ", sql);
     con.query(sql, function (err, result) {
-        if (err) return res.status(400).send("something went wrong");
+        if (err) return res.status(400).send({ text: "something went wrong" });
         console.log("result.length: ", result.length);
         if (result.length === 0) {
-            return res.status(400).send("please register");
+            return res.status(401).send({ text: "please register" });
         } else {
             const sql = `SELECT * FROM user WHERE username='${req.body.username}'`;
             con.query(sql, function (err, result) {
