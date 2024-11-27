@@ -11,16 +11,15 @@ router.get("/", function (req, res, next) {
 
 router.get("/:id/todos", function (req, res, next) {
     con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id}`, (err, result) => {
-        if (err) throw res.status(400).send("Something went wrong.", err);
+        if (err) res.status(400).send("Something went wrong.", err);
         res.status(200).send(result);
     });
 });
 
 router.get("/:id/todos/:todoId", function (req, res, next) {
-    con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id}`, (err, result) => {
-        if (err) throw res.status(400).send("Something went wrong.");
-        console.log("req.params.todoId: ", req.params.todoId);
-        res.status(200).send(result[req.params.todoId - 1]);
+    con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id} AND id=${req.params.todoId}`, (err, result) => {
+        if (err) res.status(400).send("Something went wrong.", err);
+        res.status(200).send(result);
     });
 });
 
