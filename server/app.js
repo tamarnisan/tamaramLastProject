@@ -10,6 +10,7 @@ const postRouter = require("./routes/posts");
 const commentsRouter = require("./routes/comments");
 const http = require("http");
 const app = express();
+const createError = require("http-errors");
 
 // view engine setup
 // app.set("views", path.join(__dirname, "views"));
@@ -31,7 +32,5 @@ app.use("/comments", commentsRouter);
 app.use(function (req, res, next) {
     next(createError(404));
 });
-
-// http.createServer(app).listen(3000);
 
 module.exports = app;
