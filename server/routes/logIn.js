@@ -1,16 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql");
-const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "z10mz10m",
-    database: "social_db",
-});
+const { con } = require("../con");
 router.post("/", (req, res) => {
     /////לזכור להביא את הסיסמא מטבלה נפרדת
     const sql = `SELECT * FROM password WHERE username='${req.body.username}' AND password='${req.body.password}'`;
-    console.log('sql: ', sql);
+    console.log("sql: ", sql);
     con.query(sql, function (err, result) {
         if (err) return res.status(400).send("something went wrong");
         console.log("result.length: ", result.length);
