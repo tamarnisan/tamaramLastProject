@@ -12,32 +12,36 @@ router.get("/", function (req, res, next) {
 router.get("/:id", function (req, res, next) {
     con.query(`SELECT * FROM user WHERE id=${req.params.id}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send(result); }
+        else {
+            res.status(200).send(result);
+        }
     });
-
 });
 
 /*Delete user by user_id*/
 router.delete("/:id", function (req, res, next) {
     con.query(`DELETE FROM user WHERE id=${req.params.id}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send("user deleted"); }
+        else {
+            res.status(200).send("user deleted");
+        }
     });
-
 });
 
 /*Get todos by user_id*/
 router.get("/:id/todos", function (req, res, next) {
     con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send(result); }
+        else {
+            res.status(200).send(result);
+        }
     });
-
 });
 router.get("/:id/todos/:todoId", function (req, res, next) {
     con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id} AND id=${req.params.todoId}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.", err);
-        res.status(200).send(result);
+        else if (result.length === 0) res.status(400).send("Either Todo doesn't exist, or you do not have permission to get this Todo.", err);
+        else res.status(200).send(result);
     });
 });
 
@@ -46,20 +50,35 @@ router.get("/:id/todos/:todoId", function (req, res, next) {
 router.get("/:id/posts", function (req, res, next) {
     con.query(`SELECT * FROM post WHERE user_id=${req.params.id}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send(result); }
+        else {
+            res.status(200).send(result);
+        }
     });
-
 });
+
 /*Delete posts by user_id*/
 
 router.delete("/:id/posts", function (req, res, next) {
     con.query(`DELETE FROM post WHERE user_id=${req.params.id}`, (err, result) => {
         if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send("posts deleted"); }
+        else {
+            2;
+            res.status(200).send("posts deleted");
+        }
     });
 });
 
-
-
+router.delete("/:id/todos/:todoId", (req, res) => {
+    con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id} AND id=${req.params.todoId}`, (err, result) => {
+        console.log("result: ", result);
+        if (err) res.status(400).send("Something went wrong.", err);
+        else if (result.length === 0) res.status(400).send("Either Todo doesn't exist, or you do not have permission to remove this Todo.", err);
+        else {
+            con.query(`DELETE FROM to_do WHERE user_id=${req.params.id} AND id=${req.params.todoId}`, (err, result) => {
+                res.status(200).send(`DELETED Todo with the ID: ${req.params.todoId} of User with the ID: ${req.params.id}`);
+            });
+        }
+    });
+});
 
 module.exports = router;
