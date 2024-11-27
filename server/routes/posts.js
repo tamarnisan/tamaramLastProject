@@ -9,4 +9,11 @@ router.get("/", function (req, res, next) {
     });
 });
 
+router.get("/:id", function (req, res, next) {
+    con.query(`SELECT * FROM post WHERE id=${req.params.id}`, (err, result) => {
+        if (err) throw res.status(400).send("Something went wrong.", err);
+        res.status(200).send(result);
+    });
+});
+
 module.exports = router;
