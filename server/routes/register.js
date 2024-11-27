@@ -3,10 +3,11 @@ const router = express.Router();
 const { con } = require("../con");
 router.post("/", (req, res) => {
     console.log("req.body.username: ", req.body.username);
-    const sql = `SELECT * FROM user WHERE username='${req.body.username}'`;
+    const sql = `SELECT * FROM user WHERE username='${req.body.username}' OR email='${req.body.email}'`;
     try {
         con.query(sql, function (err, result) {
-            console.log("result.length: ", result);
+            if (err) throw err;
+            console.log("result: ", result);
 
             if (result.length === 0) {
                 console.log("hiii");
@@ -31,7 +32,7 @@ router.post("/", (req, res) => {
                     });
                 });
             } else {
-                return res.status(400).send("this username is already exist");
+                return res.status(400).send("This username or email is taken");
             }
         });
     } catch (err) {
