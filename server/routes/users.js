@@ -45,6 +45,21 @@ router.get("/:id/todos/:todoId", function (req, res, next) {
     });
 });
 
+router.post("/:id/todos", function (req, res, next) {
+    console.log(`${req.body}`);
+    console.log(req.params);
+    console.log(con);
+    con.query(
+        `INSERT INTO to_do (user_id, title, completed) VALUES (${req.params.id}, '${req.body.title}', ${req.body.completed})`,
+        (err, result) => {
+            if (err) {
+                console.log("err: ", err);
+                res.status(500).send("Something went wrong.");
+            } else res.status(200).send("Added Successfully");
+        }
+    );
+});
+
 /*Get posts by user_id*/
 
 router.get("/:id/posts", function (req, res, next) {
