@@ -11,8 +11,8 @@ function Header({ currentUser, setCurrentUser }) {
 
     return (
         <div className="header">
-            <h1>Header:</h1>
-            <p>{currentUser && `Hello ${currentUser.username}`}</p>
+            <h1>Social:</h1>
+            <div>{currentUser && <button onClick={() => navigate(`/profile/${currentUser.id}`)}>Hello 123</button>}</div>
             {!currentUser && <button onClick={() => navigate("/login")}>Log in!</button>}
             {currentUser && <button onClick={logOut}>Log out</button>}
         </div>

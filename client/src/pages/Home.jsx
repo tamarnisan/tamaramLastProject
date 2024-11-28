@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { useEffect, useRef, useState } from "react";
 import Post from "../components/Post";
+import "../stylesheets/Home.scss";
 function Home() {
     const [posts, setPosts] = useState([]);
     let limit = useRef(10);
@@ -28,7 +29,7 @@ function Home() {
     }, []);
 
     return (
-        <>
+        <div className="home-posts">
             {posts}
             <button
                 onClick={() => {
@@ -39,7 +40,7 @@ function Home() {
             >
                 Load More
             </button>
-        </>
+        </div>
     );
 }
 export default Home;
