@@ -4,7 +4,8 @@ const deleteRequest = async (url) => {
         method: 'DELETE',
     });
 
-    const requestJSON = await response.json();
+    // const requestJSON = await response.json();
+    const requestJSON = "e"
     return { res: requestJSON, status: response.status };
 }
 

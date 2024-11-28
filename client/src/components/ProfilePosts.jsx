@@ -14,7 +14,11 @@ function ProfilePosts() {
       setPostarray(response.res);
     }
   };
-  getPosts();
+
+  useEffect(()=>{
+    getPosts();
+
+  },[])
 
   return (
     <>
