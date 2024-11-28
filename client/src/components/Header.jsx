@@ -1,5 +1,10 @@
-function Header({ currentUser }) {
-    return <h1>Header: {currentUser}</h1>;
+function Header(props) {
+  return (
+    <>
+      <h1>Header:</h1>
+      <p>{JSON.stringify(props.currentUser)}</p>
+    </>
+  );
 }
 
 export default Header;

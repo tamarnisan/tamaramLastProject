@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         } else {
             const sql = `SELECT * FROM user WHERE username='${req.body.username}'`;
             con.query(sql, function (err, result) {
-                if (err) return res.status(400).send("something went wrong");
+                if (err) return res.status(400).send({ text: "something went wrong" });
                 else {
                     console.log(result[0]);
                     return res.status(200).send(result[0]);

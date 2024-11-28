@@ -1,11 +1,7 @@
-const getRequest = async (url) => {
-    try {
-        const request = await fetch(url);
-        if (!request.ok) throw Error(request.status);
-        const requestJSON = await request.json();
-        return requestJSON;
-    } catch (err) {
-        return err.message;
-    }
+const GetRequest = async (url) => {
+    const request = await fetch(url);
+    const requestJSON = await request.json();
+    return { res: requestJSON, status: request.status };
 };
-export default getRequest;
+export default GetRequest;
+
