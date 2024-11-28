@@ -1,4 +1,5 @@
 const postRequest = async (obj, url) => {
+    console.log('url: ', url);
     const postOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },

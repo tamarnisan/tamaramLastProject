@@ -7,10 +7,10 @@ import deleteRequest from "../utilities/deleteRequest";
 import Post from "./Post";
 function Comment(props) {
     let comment_id = null
-    const [comment, setComment]=useState(null)
+ 
   const [commentsarray, setCommentsarray] = useState([]);
-  const [showComments, setShowComments] = useState(false);
-  const [addComment, setAddComment] = useState(false);
+ const [showComments, setShowComments]=useState(false)
+  
   const [error, setError]= useState(null)
   const getComment = async (e) => {
       const id= props.postId;
@@ -40,14 +40,15 @@ function Comment(props) {
             setCommentsarray(newArray);
             
               }}
+                     
+ 
 
 
 
         return (<>
 
          <button onClick={() => setShowComments(!showComments)}>Show Comments</button>
-      <button onClick={() => setAddComment(true)}>Add Comment</button> 
-                 {showComments &&
+           {showComments &&
                 commentsarray.map((comment) =>
                     <div>
                         <span>idComment: {comment.id}</span>
@@ -63,3 +64,5 @@ function Comment(props) {
         
 
 export default Comment;
+
+

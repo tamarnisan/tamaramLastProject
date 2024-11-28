@@ -67,8 +67,10 @@ router.post("/:id/posts", function (req, res, next) {
     con.query(sql, function (err, result) {
         if (err) return res.status(400).send({ text: "something went wrong" });
         else {
+            console.log('result: ', result);
+
             console.log("user inserted");
-            return res.status(200).send({ text: "post added" });
+            return res.status(200).send({ id: result.insertId });
         }
 
     })
