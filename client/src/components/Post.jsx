@@ -4,12 +4,7 @@ import Comment from "./Comment";
 
 export default function Post(props) {
     const [body, setBody] = useState(null);
-    const [error, setError] = useState(null);
-
-    const [username, setUserNmae] = useState("");
-    const [newcomment, setnewcomment] = useState("");
-    const [EditTitle, setEditTitle] = useState(false);
-    const [title, setTitle] = useState("");
+  
     const [error, setError] = useState(null);
 
     const handleDelete = async (e) => {
