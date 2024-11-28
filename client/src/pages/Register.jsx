@@ -131,6 +131,7 @@ export default function Register(props) {
                 <br />
                 <input type="submit" />
             </form>
+            <button onClick={()=>navigate('/logIn')}>already have an account?</button>
         </>
     );
 }

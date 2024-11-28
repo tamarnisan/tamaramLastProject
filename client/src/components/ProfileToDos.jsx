@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import GetRequest from "../utilities/getRequest";
+import ToDo from "./ToDo";
 
 function ProfileToDos() {
     const { id } = useParams();
@@ -12,16 +13,18 @@ function ProfileToDos() {
     const getTodos = async (e) => {
         const url = `http://localhost:3000/users/${id}/todos`;
         const response = await GetRequest(url);
+        console.log('response: ', response);
         if (response.status === 200) {
             setTodosarray(response.res);
+            console.log("hiiu")
         }
-        console.log(todosarray)
-    };
+    }
     
     useEffect(() => {
         getTodos();
     }, []);
-    
-    return "I am Profile ToDos";
+
+    return todosarray && todosarray.map(todo => <ToDo todo={todo} />)
 }
+
 export default ProfileToDos;

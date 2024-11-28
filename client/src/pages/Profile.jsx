@@ -22,8 +22,8 @@ function Profile({ currentUser }) {
     return (
         <>
             <nav>
-                <Link to={`/profile/${currentUser.id}`}>Posts</Link>
-                <Link to={`/profile/${currentUser.id}/todos`}>Todos</Link>
+                <Link to={`/profile/${id}`}>Posts</Link>
+                <Link to={`/profile/${id}/todos`}>Todos</Link>
             </nav>
             <button onClick={getInfo}>About Me</button>
             {info.length > 0 && (
