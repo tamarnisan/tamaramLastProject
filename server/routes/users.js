@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
 /*Get info by user_id*/
 router.get("/:id", function (req, res, next) {
     con.query(`SELECT * FROM user WHERE id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.");
+        if (err) res.status(400).send({ text: "Something went wrong." });
         else { res.status(200).send(result); }
     });
 
@@ -20,8 +20,8 @@ router.get("/:id", function (req, res, next) {
 /*Delete user by user_id*/
 router.delete("/:id", function (req, res, next) {
     con.query(`DELETE FROM user WHERE id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send("user deleted"); }
+        if (err) res.status(400).send({ text: "Something went wrong." });
+        else { res.status(200).send({ text: "user deleted" }); }
     });
 
 });
@@ -29,7 +29,7 @@ router.delete("/:id", function (req, res, next) {
 /*Get todos by user_id*/
 router.get("/:id/todos", function (req, res, next) {
     con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.");
+        if (err) res.status(400).send({ text: "Something went wrong." });
         else { res.status(200).send(result); }
     });
 
@@ -37,7 +37,7 @@ router.get("/:id/todos", function (req, res, next) {
 //get todo by todoId
 router.get("/:id/todos/:todoId", function (req, res, next) {
     con.query(`SELECT * FROM to_do WHERE user_id=${req.params.id} AND id=${req.params.todoId}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.", err);
+        if (err) res.status(400).send({ text: "Something went wrong." });
         res.status(200).send(result);
     });
 });
@@ -46,7 +46,7 @@ router.get("/:id/todos/:todoId", function (req, res, next) {
 
 router.get("/:id/posts", function (req, res, next) {
     con.query(`SELECT * FROM post WHERE user_id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.");
+        if (err) res.status(400).send({ text: "Something went wrong." });
         else { res.status(200).send(result); }
     });
 
@@ -56,8 +56,8 @@ router.get("/:id/posts", function (req, res, next) {
 
 router.delete("/:id/posts", function (req, res, next) {
     con.query(`DELETE FROM post WHERE user_id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.");
-        else { res.status(200).send("posts deleted"); }
+        if (err) res.status(400).send({ text: "Something went wrong." });
+        else { res.status(200).send({ text: "posts deleted" }); }
     });
 });
 
@@ -65,10 +65,10 @@ router.delete("/:id/posts", function (req, res, next) {
 router.post("/:id/posts", function (req, res, next) {
     const sql = `INSERT INTO post (body, user_id, title) VALUES ('${req.body.body}', ${req.params.id}, '${req.body.title}')`;
     con.query(sql, function (err, result) {
-        if (err) return res.status(400).send("something went wrong");
+        if (err) return res.status(400).send({ text: "something went wrong" });
         else {
             console.log("user inserted");
-            return res.status(200).send("\post added");
+            return res.status(200).send({ text: "post added" });
         }
 
     })

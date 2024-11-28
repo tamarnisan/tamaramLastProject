@@ -11,15 +11,15 @@ router.get("/", function (req, res, next) {
 //get comment by id
 router.get("/:id", function (req, res, next) {
     con.query(`SELECT * FROM comment WHERE id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.", err);
+        if (err) res.status(400).send({ text: "Something went wrong." });
         res.status(200).send(result);
     });
 })
 //delete comment by id
 router.delete("/:id", function (req, res, next) {
     con.query(`DELETE  FROM comment WHERE id=${req.params.id}`, (err, result) => {
-        if (err) res.status(400).send("Something went wrong.", err);
-        res.status(200).send("commnet deleted");
+        if (err) res.status(400).send({ text: "Something went wrong." });
+        res.status(200).send({ text: "commnet deleted" });
     });
 });
 
