@@ -11,13 +11,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
     const [currentUser, setCurrentUser] = useState(localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")) : null);
 
+    function updateCurrentUser(newUser) {
+        setCurrentUser(newUser);
+    }
+
     return (
         <>
             <BrowserRouter>
-                <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+                <Header currentUser={currentUser} />
                 <Routes>
-                    <Route path="/login" element={<LogIn currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<LogIn currentUser={currentUser} updateCurrentUser={updateCurrentUser} />} />
+                    <Route path="/register" element={<Register />} updateCurrentUser={updateCurrentUser} />
                     <Route path="/" element={<Home />} />
                     <Route path="/profile/:id" element={<Profile currentUser={currentUser} />}>
                         <Route index element={<ProfilePosts />} />

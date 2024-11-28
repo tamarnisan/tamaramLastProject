@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import postRequest from "../utilities/PostRequest";
+import postRequest from "../utilities/postRequest";
 // import { useNavigate } from "react-router-dom";
 export default function LogIn() {
     //   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function LogIn() {
             password: password,
         };
         console.log("userObj: ", userObj);
-        const url = `http://localhost:8080/logIn`;
+        const url = `http://localhost:3000/logIn`;
         const response = await postRequest(userObj, url);
         console.log("response.res: ", response.res);
 
