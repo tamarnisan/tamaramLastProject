@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import { useEffect, useRef, useState } from "react";
-
+import Post from "../components/Post";
 function Home() {
     const [posts, setPosts] = useState([]);
     let limit = useRef(10);
@@ -17,19 +17,10 @@ function Home() {
     }
 
     function getPostJSX(postsData) {
-        return (
-            <div className="posts">
-                {postsData
-                    ? postsData.map((post) => (
-                          <div>
-                              <h2 className="post-title">{post.title}</h2>
-                              <h3>User: {post.user_id}</h3>
-                              <p className="post-body">{post.body}</p>
-                          </div>
-                      ))
-                    : "Loading"}
-            </div>
-        );
+        return postsData.map((post) => {
+            console.log("post: ", post);
+            return <Post arr={postsData} post={post} key={post.id} />;
+        });
     }
 
     useEffect(() => {
